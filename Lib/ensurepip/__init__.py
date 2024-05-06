@@ -137,17 +137,15 @@ def _bootstrap(*, root=None, upgrade=False, user=False,
 
     _disable_pip_configuration_settings()
 
-    # By default, installing pip installs all of the
-    # following scripts (X.Y == running Python version):
-    #
-    #   pip, pipX, pipX.Y
+    # By default, the scripts pipX, pipX.Y will be installed
+    # (X.Y == running Python version).
     #
     # pip 1.5+ allows ensurepip to request that some of those be left out
     if altinstall:
-        # omit pip, pipX
+        # omit pipX
         os.environ["ENSUREPIP_OPTIONS"] = "altinstall"
     elif not default_pip:
-        # omit pip
+        # include pip
         os.environ["ENSUREPIP_OPTIONS"] = "install"
 
     with tempfile.TemporaryDirectory() as tmpdir:
